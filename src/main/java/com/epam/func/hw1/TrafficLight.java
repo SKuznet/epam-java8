@@ -23,14 +23,15 @@ public class TrafficLight {
         try {
             Callable r = (Callable<Color>) () -> {
                 try {
-                    while (true) {
+                    do {
                         trafficLight.setColor(Color.RED);
-                        TimeUnit.MINUTES.sleep(2);
+                        TimeUnit.SECONDS.sleep(2);
                         trafficLight.setColor(Color.YELLOW);
-                        TimeUnit.MINUTES.sleep(1);
+                        TimeUnit.SECONDS.sleep(1);
                         trafficLight.setColor(Color.GREEN);
-                        TimeUnit.MINUTES.sleep(3);
-                    }
+                        TimeUnit.SECONDS.sleep(3);
+
+                    } while (!service.isShutdown());
                 } catch (InterruptedException e) {
                     System.err.println("Something goes wrong...");
                 }
@@ -38,7 +39,7 @@ public class TrafficLight {
             };
 
             Future<?> f = service.submit(r);
-            f.get(trafficLight.getMinutes(), TimeUnit.MINUTES);
+            f.get(trafficLight.getMinutes(), TimeUnit.SECONDS);
 
         } catch (final InterruptedException e) {
             System.err.println("Something goes wrong...");
