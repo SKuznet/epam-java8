@@ -46,29 +46,33 @@ class TrafficLight {
     }
 
     private boolean isRed(Double aDouble) {
-        return inTheInterval(
+        return isInTheInterval(
                 0,
                 new RedLight().getDuration(),
                 aDouble);
     }
 
     private boolean isYellow(Double aDouble) {
-        return inTheInterval(
+        return isInTheInterval(
                 new RedLight().getDuration(),
                 new YellowLight().getDuration(),
                 aDouble);
     }
 
     private boolean isGreen(Double aDouble) {
-        return inTheInterval(
+        return isInTheInterval(
                 new RedLight().getDuration() + new YellowLight().getDuration(),
                 new GreenLight().getDuration(),
                 aDouble);
     }
 
 
-    private boolean inTheInterval(int start, int duration, Double aDouble) {
+    private boolean isInTheInterval(int start, int duration, Double aDouble) {
         return start <= aDouble && aDouble < start + duration;
+    }
+
+    interface Light {
+        int getDuration();
     }
 
     class RedLight implements Light {
@@ -92,8 +96,4 @@ class TrafficLight {
             return 3;
         }
     }
-}
-
-interface Light {
-    int getDuration();
 }
