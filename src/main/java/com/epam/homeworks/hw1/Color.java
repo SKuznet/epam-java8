@@ -1,17 +1,16 @@
 package com.epam.homeworks.hw1;
 
-public class Color {
-    private String color;
-    private int begin;
-    private int end;
+public enum Color {
+    RED("Red"), GREEN("Green"), YELLOW("Yellow");
 
-    public Color(String color, int begin, int end) {
-        this.color = color;
-        this.begin = begin;
-        this.end = end;
+    Color(String name) {
+        this.name = name;
     }
 
-    public String getColor() {
-        return color;
+    private String name;
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
