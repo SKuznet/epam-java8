@@ -5,15 +5,27 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-class TrafficLight {
-    void printColor(Optional<Double> optionalDouble) {
+class TrafficLight implements Runnable{
+
+    private static final int RED_LIGHT_DURATION = 2;
+    private static final int YELLOW_LIGHT_DURATION = 1;
+    private static final int GREEN_LIGHT_DURATION = 3;
+
+    private final Optional<Double> requestedTime;
+
+    TrafficLight(Optional<Double> requestedTime) {
+        this.requestedTime = requestedTime;
+    }
+
+    @Override
+    public void run() {
         System.out.println("Wait a second...");
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        optionalDouble.ifPresent(this::computeAndPrintColor);
+        requestedTime.ifPresent(this::computeAndPrintColor);
     }
 
     private void computeAndPrintColor(Double aDouble) {
@@ -33,9 +45,9 @@ class TrafficLight {
     }
 
     private int totalTrafficLightDuration() {
-        final RedLight redLight = new RedLight();
-        final YellowLight yellowLight = new YellowLight();
-        final GreenLight greenLight = new GreenLight();
+        final Light redLight = new Light(RED_LIGHT_DURATION);
+        final Light yellowLight = new Light(YELLOW_LIGHT_DURATION);
+        final Light greenLight = new Light(GREEN_LIGHT_DURATION);
 
         final List<Light> lights = new ArrayList<>();
         lights.add(redLight);
@@ -48,52 +60,26 @@ class TrafficLight {
     private boolean isRed(Double aDouble) {
         return isInTheInterval(
                 0,
-                new RedLight().getDuration(),
+                new Light(RED_LIGHT_DURATION).getDuration(),
                 aDouble);
     }
 
     private boolean isYellow(Double aDouble) {
         return isInTheInterval(
-                new RedLight().getDuration(),
-                new YellowLight().getDuration(),
+                new Light(RED_LIGHT_DURATION).getDuration(),
+                new Light(YELLOW_LIGHT_DURATION).getDuration(),
                 aDouble);
     }
 
     private boolean isGreen(Double aDouble) {
         return isInTheInterval(
-                new RedLight().getDuration() + new YellowLight().getDuration(),
-                new GreenLight().getDuration(),
+                new Light(RED_LIGHT_DURATION).getDuration() + new Light(YELLOW_LIGHT_DURATION).getDuration(),
+                new Light(GREEN_LIGHT_DURATION).getDuration(),
                 aDouble);
     }
 
 
     private boolean isInTheInterval(int start, int duration, Double aDouble) {
         return start <= aDouble && aDouble < start + duration;
-    }
-
-    interface Light {
-        int getDuration();
-    }
-
-    class RedLight implements Light {
-        @Override
-        public int getDuration() {
-            return 2;
-        }
-    }
-
-    class YellowLight implements Light {
-        @Override
-        public int getDuration() {
-            return 1;
-        }
-    }
-
-
-    class GreenLight implements Light {
-        @Override
-        public int getDuration() {
-            return 3;
-        }
     }
 }

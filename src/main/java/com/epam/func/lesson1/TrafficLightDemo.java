@@ -1,22 +1,26 @@
 package com.epam.func.lesson1;
 
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class TrafficLightDemo {
     public static void main(String[] args) {
 
-        Supplier<TrafficLight> trafficLightSupplier = TrafficLight::new;
+        Function<Optional<Double>, TrafficLight> trafficLightFunction = TrafficLight::new;
         Supplier<OptionalDoubleSupplier> optionalDoubleSupplierSupplier = () -> new OptionalDoubleSupplier();
 
-        Optional<Double> optionalDouble;
-        final TrafficLight trafficLight = trafficLightSupplier.get();
+        final ExecutorService executorService = Executors.newCachedThreadPool();
 
         while (true) {
+            Optional<Double> optionalDouble;
             try (OptionalDoubleSupplier optionalDoubleSupplier = optionalDoubleSupplierSupplier.get()) {
                 optionalDouble = optionalDoubleSupplier.getOptionalDouble();
             }
-            trafficLight.printColor(optionalDouble);
+
+            executorService.execute(trafficLightFunction.apply(optionalDouble));
         }
     }
 }
