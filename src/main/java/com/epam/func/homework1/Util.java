@@ -30,7 +30,7 @@ public class Util {
 
     public static void getLight(int time) {
         IntConsumer getLight = t -> {
-            IntFunction<Light> checkLight = trafficLight::checkLight;
+            IntFunction<Light> checkLight = trafficLight::getLight;
             print(checkLight.apply(t).toString(), 1);
         };
         getLight.accept(time);

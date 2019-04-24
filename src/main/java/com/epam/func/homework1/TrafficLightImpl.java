@@ -11,11 +11,6 @@ public class TrafficLightImpl implements TrafficLight {
     private Light nextLight;
 
     @Override
-    public Light getCurrentLight() {
-        return currentLight;
-    }
-
-    @Override
     public void changeLight() {
         switch (currentLight) {
             case RED: {
@@ -36,7 +31,7 @@ public class TrafficLightImpl implements TrafficLight {
     }
 
     @Override
-    public Light checkLight(int time) {
+    public Light getLight(int time) {
         currentLight = RED;
         nextLight = GREEN;
         BiPredicate<Light, Integer> checkRed = (light, t) -> (t == 2 && light.equals(RED));
@@ -50,6 +45,6 @@ public class TrafficLightImpl implements TrafficLight {
                 changeLight();
             }
         }
-        return getCurrentLight();
+        return currentLight;
     }
 }
