@@ -9,6 +9,7 @@ public interface OptionalDoubleSupplierInterface extends Supplier<Optional<Doubl
 
     default Optional<Double> getOptionalDouble() {
         final Scanner scanner = new Scanner(System.in);
-        return Optional.of(scanner.nextDouble());
+        final double value = scanner.nextDouble();
+        return value > 0 ? Optional.of(value) : Optional.empty();
     }
 }
