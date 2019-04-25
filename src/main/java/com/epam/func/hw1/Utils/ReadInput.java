@@ -7,20 +7,24 @@ import java.util.InputMismatchException;
 
 public class ReadInput {
     public void readFromConsole() {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        SeeAtTrafficLight logic = new SeeAtTrafficLight();
-        while (true){
-            try {
-                Integer input = new Integer(br.readLine());
-                String color = logic.color(input, logic::theLights);
-                if (color != null) {
-                    System.out.println(color);
-                } else {
-                    System.err.println("Not in the interval!");
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
+            SeeAtTrafficLight logic = new SeeAtTrafficLight();
+            while (true) {
+                try {
+                    Integer input = new Integer(br.readLine());
+                    String color = logic.color(input, logic::theLights);
+                    if (color != null) {
+                        System.out.println(color);
+                    } else {
+                        System.err.println("Not in the interval!");
+                    }
+                } catch (IOException | InputMismatchException | NumberFormatException e) {
+                    System.err.println("please, use numbers as in prescription");
                 }
-            } catch (IOException | InputMismatchException | NumberFormatException e) {
-                System.err.println("please, use numbers as in prescription");
             }
+        } catch (IOException e) {
+            System.err.println("Exception from reader!");
+            e.printStackTrace();
         }
     }
 }
