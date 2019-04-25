@@ -11,7 +11,6 @@ public class Semaphore {
     private final Queue<Callable<SemaphoreColor>> semaphoreThreadsQueue;
     private AtomicLong minutes;
 
-
     public Semaphore() {
         semaphoreThreadsQueue = new LinkedList<>();
         minutes = new AtomicLong();
@@ -85,7 +84,6 @@ public class Semaphore {
         executor.shutdown();
         return result;
     }
-
 
     public void runApp() {
         String arg;
