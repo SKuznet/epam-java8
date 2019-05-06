@@ -1,6 +1,7 @@
 package hw1;
 
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Process {
@@ -10,19 +11,24 @@ public class Process {
             while (true) {
                 System.out.println("Введите колличество минут (для выхода введите q)");
                 String input = scanner.nextLine();
-                char ch = input.charAt(0);
-                if (Character.isDigit(ch)) {
-                    try {
-                        int number = Integer.parseInt(input);
-                        System.out.println(number);
-                        showLight(number);
-                    } catch (NumberFormatException e) {
-                        e.getMessage();
+                Optional<String> optional = Optional.of(input);
+                if(optional.isPresent()) {
+                    char ch = input.charAt(0);
+                    if (Character.isDigit(ch)) {
+                        try {
+                            int number = Integer.parseInt(input);
+                            System.out.println(number);
+                            showLight(number);
+                        } catch (NumberFormatException e) {
+                            e.getMessage();
+                        }
+                    } else if (ch == 'q'){
+                        break;
+                    } else {
+                        System.out.println("Вы ввели неправильное число");
                     }
-                } else if (ch == 'q'){
-                    break;
                 } else {
-                    System.out.println("Вы ввели неправильное число");
+                    System.out.println("Значение = null");
                 }
             }
         }
