@@ -19,3 +19,11 @@ Clean code!!!!
 Предусмотреть - некорректное значение от пользователя.
 
 ## Workflowy - https://workflowy.com/s/java8/683ZBbIRPY8rZgZn
+
+## 2 Task
+
+Взять три метода из CompletableFuture и написать небольшие примеры с ними
+
+anyOf
+allOf
+whenComplete
