@@ -32,7 +32,6 @@ public class CompletableFutureDemo {
         allFuture.get();
         System.out.println("All futures are done: " + System.currentTimeMillis());
 
-
     }
 
     static class StringSupplier implements Supplier<String> {
