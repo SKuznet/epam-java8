@@ -32,6 +32,7 @@ public class CompletableFutureDemo {
         System.out.println("All futures are done: " + System.currentTimeMillis());
     }
 
+
     static class StringSupplier implements Supplier<String> {
 
         private static final Random RANDOM = new Random();
