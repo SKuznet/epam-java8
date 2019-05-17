@@ -15,10 +15,14 @@ public class Main {
         while (true) {
             try {
                 int minute = scanner.nextInt() % LOOP_DURATION;
+                if (minute < 0) {
+                    throw new IllegalArgumentException();
+                }
                 System.out.println(trafficLight.checkColor(minute));
                 System.out.println("\nGive it another try!");
-            } catch (InputMismatchException e) {
-                System.out.println("\nPlease enter a valid number.");
+            } catch (InputMismatchException | IllegalArgumentException e) {
+                System.err.println("\nPlease enter a valid number.");
+                scanner.next();
             }
         }
     }
