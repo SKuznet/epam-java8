@@ -5,7 +5,7 @@ public enum Color {
   YELLOW(1),
   GREEN(3);
 
-  int waitTimeInMinutes;
+  private int waitTimeInMinutes;
 
   Color(int waitTimeInMinutes) {
     this.waitTimeInMinutes = waitTimeInMinutes;

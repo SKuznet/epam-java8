@@ -2,11 +2,7 @@ package com.epam.func.hw1;
 
 
 public class TrafficLight {
-  private Color currentColor;
-
-  public TrafficLight(Color color) {
-    this.currentColor = color;
-  }
+  private Color currentColor = Color.RED;
 
   public void start() {
     while (true) {
