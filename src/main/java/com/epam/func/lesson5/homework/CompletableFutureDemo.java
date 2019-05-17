@@ -26,12 +26,10 @@ public class CompletableFutureDemo {
         System.out.println(anyFuture.get());
         System.out.println("First Future is complete in: " + System.currentTimeMillis());
 
-
         final CompletableFuture<Void> allFuture = CompletableFuture.allOf(futures.toArray(futureArr));
         System.out.println("Waiting for others: " + System.currentTimeMillis());
         allFuture.get();
         System.out.println("All futures are done: " + System.currentTimeMillis());
-
     }
 
     static class StringSupplier implements Supplier<String> {
