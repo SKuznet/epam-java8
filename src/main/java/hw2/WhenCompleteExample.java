@@ -33,7 +33,7 @@ public class WhenCompleteExample {
             completableFutureA.get();
             completableFutureB.get();
         } catch (InterruptedException | ExecutionException e) {
-
+            e.printStackTrace();
         }
     }
 }
