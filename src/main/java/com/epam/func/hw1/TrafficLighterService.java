@@ -1,21 +1,10 @@
 package com.epam.func.hw1;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.epam.func.hw1.util.Light;
 
-public class TrafficLighterService {
+import java.io.IOException;
 
-    private final List<Light> orderedLightList;
+public interface TrafficLighterService {
 
-    TrafficLighterService() {
-        this.orderedLightList = new ArrayList<>();
-        orderedLightList.add(Light.RED_LIGHT);
-        orderedLightList.add(Light.YELLOW_LIGHT);
-        orderedLightList.add(Light.GREEN_LIGHT);
-    }
-
-    public Light getColor(Double num) {
-        return Light.GREEN_LIGHT;
-    }
-
+    Light getCurrentLight(Double num) throws IOException;
 }

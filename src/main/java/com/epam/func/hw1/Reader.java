@@ -1,16 +1,7 @@
 package com.epam.func.hw1;
 
-import java.util.Scanner;
+public interface Reader {
 
-public class Reader {
+    String readLine();
 
-    private Scanner scanner;
-
-    Reader() {
-        this.scanner = new Scanner(System.in);
-    }
-
-    public String readLine() {
-        return scanner.nextLine();
-    }
 }
