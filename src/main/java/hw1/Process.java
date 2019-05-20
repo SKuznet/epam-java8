@@ -3,22 +3,29 @@ package hw1;
 
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.function.Function;
 
-public class Process {
+public class Process implements Runnable{
 
-    public void start() {
+    @Override
+    public void run() {
+        start();
+    }
+
+    private void start() {
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 System.out.println("Введите колличество минут (для выхода введите q)");
                 String input = scanner.nextLine();
                 Optional<String> optional = Optional.of(input);
-                if(optional.isPresent()) {
-                    char ch = input.charAt(0);
+                if(optional.isPresent() && !(optional.get().equals(""))) {
+                    char ch = optional.get().charAt(0);
                     if (Character.isDigit(ch)) {
                         try {
-                            int number = Integer.parseInt(input);
-                            System.out.println(number);
-                            showLight(number);
+                            Function<String, Integer> toInteger = string -> parse(string);
+                            Integer integer = toInteger.apply(input);
+                            System.out.println(integer);
+                            showLight(integer);
                         } catch (NumberFormatException e) {
                             e.getMessage();
                         }
@@ -28,7 +35,7 @@ public class Process {
                         System.out.println("Вы ввели неправильное число");
                     }
                 } else {
-                    System.out.println("Значение = null");
+                    System.out.println("Вы ввели неправильное число");
                 }
             }
         }
@@ -45,5 +52,9 @@ public class Process {
             light = Light.GREEN;
         }
         System.out.println(light);
+    }
+
+    private Integer parse(String s) {
+        return Integer.parseInt(s);
     }
 }
