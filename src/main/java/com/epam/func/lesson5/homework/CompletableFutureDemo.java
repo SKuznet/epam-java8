@@ -11,7 +11,6 @@ import java.util.function.Supplier;
 public class CompletableFutureDemo {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         final Supplier<String> supplier = new StringSupplier();
-
         final List<CompletableFuture<String>> futures = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
@@ -21,7 +20,6 @@ public class CompletableFutureDemo {
         }
 
         final CompletableFuture[] futureArr = new CompletableFuture[1];
-
         final CompletableFuture<Object> anyFuture = CompletableFuture.anyOf(futures.toArray(futureArr));
         System.out.println(anyFuture.get());
         System.out.println("First Future is complete in: " + System.currentTimeMillis());
@@ -34,7 +32,6 @@ public class CompletableFutureDemo {
 
 
     static class StringSupplier implements Supplier<String> {
-
         private static final Random RANDOM = new Random();
         private static final int MIN_AWAIT = 200;
 
