@@ -2,7 +2,7 @@ package com.epam.func.hw2;
 
 import java.util.concurrent.CompletableFuture;
 
-public class whenCompleteExample {
+public class WhenCompleteExample {
     public static void main(String[] args) throws Exception {
         runTasks(2);
         runTasks(0);
