@@ -31,7 +31,7 @@ public class AllOfExample {
                 .map(CompletableFuture::join)
                 .collect(Collectors.joining(" "));
 
-        System.out.println("combined equals 'Hello Beautiful World': " +
-                combined.equals("Hello Beautiful World"));
+        System.out.println("combined equals 'Just Be Happy': " +
+                combined.equals("Just Be Happy"));
     }
 }
